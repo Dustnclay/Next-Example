@@ -27,7 +27,7 @@ export default function Home(data) {
         <h1 className={styles.title}>
           Welcome to the Next PokeApp
         </h1>
-        <Link href="/pokemon">
+        <Link href="/pokemonList/1-20">
           <a>view pokemon page!</a>
         </Link>
 
