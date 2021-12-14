@@ -1,7 +1,24 @@
 
 .card{
+    display: flex;
+    flex-direction: column;
     flex: 1 0 21%; 
     margin: 5px;
-    /* height: 100px; */
-    background-color: blanchedalmond;
+    height: 300px;
+    width:260px;
+    background-image: linear-gradient(rgb(161, 196, 81), rgb(247, 247, 244));
+}
+
+.textCenter{
+    text-align: center;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+}
+
+.image{
+    height: 40px;
+    width: 32px;
 }

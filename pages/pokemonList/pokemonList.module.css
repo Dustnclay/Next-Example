@@ -3,3 +3,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
   }
+
+.button{
+  margin:5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: linear-gradient(rgb(83, 95, 202),white);
+  border: 1px solid black;
+}

@@ -4,9 +4,11 @@ import Layout from '../../components/layout'
 import PokeCard from '../../components/PokeCard'
 import fetch from 'node-fetch'
 import styles from './pokemonList.module.css'
+import {useState} from 'react'
 
 export default function Pokemon(props) {
-    console.log('props in pokelistsection',props)
+
+    const [search, setSearch] = useState('')
     let items = props.result.data.results
     let prev = undefined;
     let prevLink = undefined;
@@ -23,6 +25,11 @@ export default function Pokemon(props) {
         nextLink = `/pokemonList/${next}`
     }
 
+    function searchHandler(e){
+        if(e.target.value > 0 && e.target.value < 1118 ){
+            setSearch(e.target.value)
+        }
+    }
 
     return(
         <Layout>
@@ -34,8 +41,20 @@ export default function Pokemon(props) {
                 <a>Home</a>
             </Link>
             <br/>
-            {prev && <Link href={prevLink}>prev</Link>}
-            {next && <Link href={nextLink}>next</Link>} 
+
+            <div>
+                <span>search by number </span>
+                <input placeholder='1 - 1118' type='text' onChange={searchHandler}></input>
+                <Link href={search}>Go!</Link>
+            </div>
+
+            {prev && <span className={styles.button}>
+                <Link className={styles.button} href={prevLink}>prev</Link>
+            </span>}
+            {next && <span className={styles.button}>
+                <Link className={styles.button} href={nextLink}>next</Link>
+            </span>} 
+
             <div className={styles.cardContainer}>
                 {items.map((pokemon,id) => {
                     return(
