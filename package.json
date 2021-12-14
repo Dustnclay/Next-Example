@@ -1,12 +1,15 @@
 {
-  "name": "pokemon",
-  "private": true,
   "scripts": {
+    "layer0:dev": "layer0 dev",
+    "layer0:build": "layer0 build",
+    "layer0:deploy": "layer0 deploy",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
+  "name": "pokemon",
+  "private": true,
   "dependencies": {
     "next": "12.0.7",
     "node-fetch": "^3.1.0",
@@ -14,6 +17,12 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@layer0/cli": "^4.6.0",
+    "@layer0/core": "^4.6.0",
+    "@layer0/devtools": "^4.6.0",
+    "@layer0/next": "^4.6.0",
+    "@layer0/prefetch": "^4.6.0",
+    "@layer0/react": "^4.6.0",
     "eslint": "8.4.0",
     "eslint-config-next": "12.0.7"
   }
