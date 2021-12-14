@@ -6,6 +6,7 @@ import fetch from 'node-fetch'
 import styles from './pokemonList.module.css'
 
 export default function Pokemon(props) {
+    console.log('props in pokelistsection',props)
     let items = props.result.data.results
     let prev = undefined;
     let prevLink = undefined;
@@ -58,13 +59,13 @@ export default function Pokemon(props) {
 // }
 
 export async function getServerSideProps(ctx) {
-    // Get external data from the file system, API, DB, etc.
     const {section} = ctx.params
-    const host = 'http://localhost:3000'
+    const host = 'http://' + ctx.req.headers.host
+    // console.log('host',host)
     const data = await fetch(`${host}/api/getpokemon/${section}`);
+    // console.log('data in pokemonlist/section',data)
     const result = await data.json()
-    // The value of the `props` key will be
-    //  passed to the `Home` component
+
     return {
       props: {result}
     }
