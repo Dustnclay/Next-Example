@@ -69,20 +69,12 @@ export default function Pokemon(props) {
     )
 }
 
-// export default function getStaticPaths(){
-//     const paths = getNextAndPrevPaths()
-//     return {
-//       paths,
-//       fallback: false
-//     }
-// }
-
 export async function getServerSideProps(ctx) {
     const {section} = ctx.params
     const host = 'http://' + ctx.req.headers.host
-    // console.log('host',host)
+
     const data = await fetch(`${host}/api/getpokemon/${section}`);
-    // console.log('data in pokemonlist/section',data)
+    
     const result = await data.json()
 
     return {

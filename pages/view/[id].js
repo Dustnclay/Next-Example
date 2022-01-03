@@ -9,8 +9,10 @@ import Layout from '../../components/layout'
 export default function View(props){
     const router = useRouter()
     const info = props.result.data
+    console.log('info in View',info)
     var headerId = ''
     const pokemonId = info.order.toString()
+    let name = info.name[0].toUpperCase() + info.name.substring(1)
 
     if(pokemonId.length == 1){
         headerId = "#00"+pokemonId
@@ -31,25 +33,27 @@ export default function View(props){
 
             <br/>
             <h3>{headerId}</h3>
-             <h1>{info.name}</h1>
+             <h1>{name}</h1>
              <img src={info.sprites.front_default} className={styles.image} alt='pokemon image'></img>
-            <h2>{info.name} is a {info.types[0].type.name}-type pokemon</h2>
-            <h3>Base Attack:</h3>
-            <h3>Base Defense:</h3>
-            <h3>Base HP:</h3>
+            <h2>{name} is a {info.types.map(types => {return types.type.name + '-'})}type pokemon</h2>
+            
+            <h3>Height: {info.height} meters</h3>
+            <h3> Weight: {info.weight} kg</h3>
+            <h3>Base HP: {info.stats[0].base_stat}</h3>
+            <h3>Base Attack: {info.stats[1].base_stat}</h3>
+            <h3>Base Defense: {info.stats[2].base_stat}</h3>
+            <h3>Base Special Attack: {info.stats[3].base_stat}</h3>
+            <h3>Base Special Defense: {info.stats[4].base_stat}</h3>
+            <h3>Speed: {info.stats[5].base_stat}</h3>
         </Layout>
     )
 }
 
 export async function getServerSideProps(ctx) {
-    console.log('ctx',ctx)
-    console.log('ctx params',ctx.params)
-    console.log('ctx stuff',ctx.params.id)
+
     const {id} = ctx.params
     const host = 'http://' + ctx.req.headers.host
-    console.log('host/id in view Id',host+'/api/specs'+id)
     const data = await fetch(`${host}/api/specs/${id}`);
-    // console.log('data in pokemonlist/section',data)
     const result = await data.json()
 
     return {

@@ -25,10 +25,10 @@ export default function Home(data) {
         />
 
         <h1 className={styles.title}>
-          Welcome to the Next PokeApp
+          Welcome to the Next.js PokeApp
         </h1>
         <Link href="/pokemonList/1-20">
-          <a>view pokemon page!</a>
+          <a>View Pokemon Page!</a>
         </Link>
 
         

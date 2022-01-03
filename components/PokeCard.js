@@ -5,6 +5,7 @@ import Link from 'next/link'
 export default function Pokecard(props){
 
     let pokemonId = props.url.split('/')[props.url.split('/').length-2].toString()
+    let name = props.pokemon[0].toUpperCase() + props.pokemon.substring(1)
     let headerId = '';
     const viewId = `/view/${pokemonId}`
     if(pokemonId.length == 1){
@@ -19,7 +20,7 @@ export default function Pokecard(props){
           
                 <div key={props.pokemon} className={styles.card}>
                     <h3>{headerId}</h3>
-                    <h1 className={styles.textCenter}> {props.pokemon}</h1>
+                    <h1 className={styles.textCenter}> {name}</h1>
                     <div className={styles.center}>
                         <Link href={viewId}>View Pokemon</Link>
                     </div>
