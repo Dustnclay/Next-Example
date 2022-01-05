@@ -3,7 +3,6 @@ import Link from 'next/link'
 
 
 export default function Pokecard(props){
-
     let pokemonId = props.url.split('/')[props.url.split('/').length-2].toString()
     let name = props.pokemon[0].toUpperCase() + props.pokemon.substring(1)
     let headerId = '';

@@ -6,12 +6,13 @@ import Layout from '../../components/layout'
 
 
 
-export default function View(props){
+function View(props){
+    console.log(props)
     const router = useRouter()
-    const info = props.result.data
+    const info = props.result
     console.log('info in View',info)
     var headerId = ''
-    const pokemonId = info.order.toString()
+    const pokemonId = info.id.toString()
     let name = info.name[0].toUpperCase() + info.name.substring(1)
 
     if(pokemonId.length == 1){
@@ -55,14 +56,24 @@ export default function View(props){
     )
 }
 
-export async function getServerSideProps(ctx) {
+// export async function getServerSideProps(ctx) {
 
-    const {id} = ctx.params
-    const host = 'http://' + ctx.req.headers.host
-    const data = await fetch(`${host}/api/specs/${id}`);
-    const result = await data.json()
+//     const {id} = ctx.params
+//     const host = 'http://' + ctx.req.headers.host
+//     const data = await fetch(`${host}/api/specs/${id}`);
+//     const result = await data.json()
 
-    return {
-      props: {result:result}
-    }
+//     return {
+//       props: {result:result}
+//     }
+//   }
+
+  View.getInitialProps = async (ctx) => {
+    console.log('ctx in pokemonList', ctx)
+    const {id} = ctx.query  
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+    const json = await res.json()
+    return { result: json }
   }
+  
+  export default View

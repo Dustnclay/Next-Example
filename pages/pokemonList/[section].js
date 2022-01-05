@@ -83,7 +83,9 @@ import {useState} from 'react'
 //   }
 
   Pokemon.getInitialProps = async (ctx) => {
+    console.log('ctx in pokemonList', ctx)
     const {section} = ctx.query
+    // const {host} = ctx.
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${section}&limit=20`)
     const json = await res.json()
     return { result: json }
