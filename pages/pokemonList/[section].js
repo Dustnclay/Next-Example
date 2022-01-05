@@ -2,13 +2,11 @@ import Link from 'next/link'
 import Head from 'next/head'
 import Layout from '../../components/layout'
 import PokeCard from '../../components/PokeCard'
-// import fetch from 'node-fetch'
 import styles from './pokemonList.module.css'
 import {useState} from 'react'
 
 
  function Pokemon(props) {
-    console.log('props',props)
     const [search, setSearch] = useState('')
     let items = props.result.results
     let prev = undefined;
@@ -70,17 +68,6 @@ import {useState} from 'react'
         </Layout>
     )
 }
-
-// export async function getServerSideProps(ctx) {
-//     const {section} = ctx.params
-//     const host = 'http://' + ctx.req.headers.host
-//     const data = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${section}&limit=20`)
-//     const result = await data.json()
-
-//     return {
-//       props: {result}
-//     }
-//   }
 
   Pokemon.getInitialProps = async (ctx) => {
     console.log('ctx in pokemonList', ctx)
