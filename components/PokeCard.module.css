@@ -21,4 +21,14 @@
 .image{
     height: 40px;
     width: 32px;
+    margin:auto;
+}
+
+.imageContainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin:auto;
+    text-align: center;
+
 }

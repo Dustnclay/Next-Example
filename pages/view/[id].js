@@ -36,15 +36,21 @@ export default function View(props){
              <h1>{name}</h1>
              <img src={info.sprites.front_default} className={styles.image} alt='pokemon image'></img>
             <h2>{name} is a {info.types.map(types => {return types.type.name + '-'})}type pokemon</h2>
-            
-            <h3>Height: {info.height} meters</h3>
-            <h3> Weight: {info.weight} kg</h3>
-            <h3>Base HP: {info.stats[0].base_stat}</h3>
-            <h3>Base Attack: {info.stats[1].base_stat}</h3>
-            <h3>Base Defense: {info.stats[2].base_stat}</h3>
-            <h3>Base Special Attack: {info.stats[3].base_stat}</h3>
-            <h3>Base Special Defense: {info.stats[4].base_stat}</h3>
-            <h3>Speed: {info.stats[5].base_stat}</h3>
+            <div className={styles.row}>
+                <div className={styles.col}>
+                    <h3>Height: {info.height} meters</h3>
+                    <h3>Weight: {info.weight} kg</h3>
+                    <h3>Base HP: {info.stats[0].base_stat}</h3>
+                    <h3>Base Attack: {info.stats[1].base_stat}</h3>                
+                </div>
+                <div className={styles.col}>
+                    <h3>Base Defense: {info.stats[2].base_stat}</h3>
+                    <h3>Base Special Attack: {info.stats[3].base_stat}</h3>
+                    <h3>Base Special Defense: {info.stats[4].base_stat}</h3>
+                    <h3>Speed: {info.stats[5].base_stat}</h3>                
+                </div>                
+            </div>
+     
         </Layout>
     )
 }

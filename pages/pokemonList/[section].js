@@ -2,26 +2,27 @@ import Link from 'next/link'
 import Head from 'next/head'
 import Layout from '../../components/layout'
 import PokeCard from '../../components/PokeCard'
-import fetch from 'node-fetch'
+// import fetch from 'node-fetch'
 import styles from './pokemonList.module.css'
 import {useState} from 'react'
 
-export default function Pokemon(props) {
 
+ function Pokemon(props) {
+    console.log('props',props)
     const [search, setSearch] = useState('')
-    let items = props.result.data.results
+    let items = props.result.results
     let prev = undefined;
     let prevLink = undefined;
     let nextLink = undefined;
     let next = undefined;
     
-    if(props.result.data.previous){
-         prev = parseInt(props.result.data.previous.split('offset=')[1].split('&')[0])+1       
+    if(props.result.previous){
+         prev = parseInt(props.result.previous.split('offset=')[1].split('&')[0])+1       
          prevLink = `/pokemonList/${prev}`
 
     }
-    if(props.result.data.next){
-        next = parseInt(props.result.data.next.split('offset=')[1].split('&')[0])+1
+    if(props.result.next){
+        next = parseInt(props.result.next.split('offset=')[1].split('&')[0])+1
         nextLink = `/pokemonList/${next}`
     }
 
@@ -44,6 +45,7 @@ export default function Pokemon(props) {
 
             <div>
                 <span>search by number </span>
+                {/* after 898 it jumps to 10001 */}
                 <input placeholder='1 - 1118' type='text' onChange={searchHandler}></input>
                 <Link href={search}>Go!</Link>
             </div>
@@ -69,15 +71,22 @@ export default function Pokemon(props) {
     )
 }
 
-export async function getServerSideProps(ctx) {
-    const {section} = ctx.params
-    const host = 'http://' + ctx.req.headers.host
+// export async function getServerSideProps(ctx) {
+//     const {section} = ctx.params
+//     const host = 'http://' + ctx.req.headers.host
+//     const data = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${section}&limit=20`)
+//     const result = await data.json()
 
-    const data = await fetch(`${host}/api/getpokemon/${section}`);
-    
-    const result = await data.json()
+//     return {
+//       props: {result}
+//     }
+//   }
 
-    return {
-      props: {result}
-    }
+  Pokemon.getInitialProps = async (ctx) => {
+    const {section} = ctx.query
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${section}&limit=20`)
+    const json = await res.json()
+    return { result: json }
   }
+  
+  export default Pokemon
