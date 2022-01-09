@@ -2,10 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
+// import Prefetch
 
 
 export default function Home(data) {
-  console.log(data)
   return (
     <div className={styles.container}>
       <Head>
@@ -27,7 +27,7 @@ export default function Home(data) {
         <h1 className={styles.title}>
           Welcome to the Next.js PokeApp
         </h1>
-        <Link href="/pokemonList/1-20">
+        <Link href="/pokemonList/1">
           <a>View Pokemon Page!</a>
         </Link>
 

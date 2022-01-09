@@ -6,13 +6,15 @@ import styles from './pokemonList.module.css'
 import {useState} from 'react'
 
 
+
  function Pokemon(props) {
+
     const [search, setSearch] = useState('')
     let items = props.result.results
-    let prev = undefined;
-    let prevLink = undefined;
-    let nextLink = undefined;
-    let next = undefined;
+    let prev ;
+    let prevLink;
+    let nextLink;
+    let next ;
     
     if(props.result.previous){
          prev = parseInt(props.result.previous.split('offset=')[1].split('&')[0])+1       
@@ -30,30 +32,38 @@ import {useState} from 'react'
         }
     }
 
+    function submitHandler(e){
+        if(e.charCode==13){
+            const { href } = window.location;
+            window.location.href = `/pokemonList/${search}`;
+          }
+    }
+
+
     return(
         <Layout>
             <Head>
                 <title>Pokemon</title>
             </Head>
-            
-            <Link href='/'>
-                <a>Home</a>
-            </Link>
+
             <br/>
 
-            <div>
-                <span>search by number </span>
-                {/* after 898 it jumps to 10001 */}
-                <input placeholder='1 - 1118' type='text' onChange={searchHandler}></input>
-                <Link href={search}>Go!</Link>
+            <div className={styles.search}>
+                <span >Search by Number </span>
+                <input className={styles.searchInput} placeholder='1 to 1117' type='text' onChange={searchHandler} onKeyPress={(e) => submitHandler(e)}></input>
+                <Link href={`/pokemonList/${search}`}>
+                    <a className={styles.goButton}>Go!</a>
+                </Link>            
             </div>
+            <div className={styles.buttonContainer}>
 
-            {prev && <span className={styles.button}>
-                <Link className={styles.button} href={prevLink}>prev</Link>
-            </span>}
-            {next && <span className={styles.button}>
-                <Link className={styles.button} href={nextLink}>next</Link>
-            </span>} 
+                {prev && <span className={styles.button}>
+                    <Link className={styles.button} href={prevLink}>Previous</Link>
+                </span>}
+                {next && <span className={styles.button}>
+                    <Link className={styles.button} href={nextLink}>Next </Link>
+                </span>} 
+            </div>
 
             <div className={styles.cardContainer}>
                 {items.map((pokemon,id) => {
@@ -63,16 +73,22 @@ import {useState} from 'react'
                         </div>
                 )})}
             </div>
-            {prev && <Link href={prevLink}>prev</Link>}
-            {next && <Link href={nextLink}>next</Link>}
+            <div className={styles.buttonContainer}>
+                {prev && <span className={styles.button}>
+                    <Link className={styles.button} href={prevLink}>Previous</Link>
+                </span>}
+                {next && <span className={styles.button}>
+                    <Link className={styles.button} href={nextLink}>Next</Link>
+                </span>}
+            </div>
+            
         </Layout>
     )
 }
 
   Pokemon.getInitialProps = async (ctx) => {
-    console.log('ctx in pokemonList', ctx)
-    const {section} = ctx.query
-    // const {host} = ctx.
+    let {section} = ctx.query
+    section -= 1
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${section}&limit=20`)
     const json = await res.json()
     return { result: json }

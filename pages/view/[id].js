@@ -7,12 +7,16 @@ import Layout from '../../components/layout'
 
 
 function View(props){
-    console.log(props)
+    console.log('props', props.result)
     const router = useRouter()
     const info = props.result
-    console.log('info in View',info)
     var headerId = ''
+    let prev ;
+    let prevLink;
+    let nextLink;
+    let next ;
     const pokemonId = info.id.toString()
+    let backId;
     let name = info.name[0].toUpperCase() + info.name.substring(1)
 
     if(pokemonId.length == 1){
@@ -22,15 +26,34 @@ function View(props){
     }else{
         headerId = `#${pokemonId}`
     }
+
+    if (pokemonId > 1 && pokemonId <= 898){
+        prev = parseInt(pokemonId) - 1
+        prevLink = `/view/${prev}`
+    }
+
+    // special case for 898 and 10001
+
+
+    if (pokemonId < 1118) {
+        next = parseInt(pokemonId) +1
+        nextLink = `/view/${next}`
+    }
+
+    if(pokemonId > 898){
+        backId = pokemonId - 9102
+    }else{
+        backId = pokemonId
+    }
     
     return(
         <Layout>
-            <Link href='/'>
-                <a>Home</a>
-            </Link>
-            <div>
-                <button onClick={() => router.back()}>Back</button>
+            <div className={styles.buttonContainer}>
+                <div className={styles.backButton}>
+                    <Link  href={`/pokemonList/${backId}`}>Back to List</Link>
+                </div>                
             </div>
+
 
             <br/>
             <h3>{headerId}</h3>
@@ -51,25 +74,21 @@ function View(props){
                     <h3>Speed: {info.stats[5].base_stat}</h3>                
                 </div>                
             </div>
+
+            <div className={styles.buttonContainer}>
+                {prev && <span className={styles.button}>
+                    <Link className={styles.button} href={prevLink}>Previous</Link>
+                </span>}
+                {next && <span className={styles.button}>
+                    <Link className={styles.button} href={nextLink}>Next </Link>
+                </span>} 
+            </div>
      
         </Layout>
     )
 }
 
-// export async function getServerSideProps(ctx) {
-
-//     const {id} = ctx.params
-//     const host = 'http://' + ctx.req.headers.host
-//     const data = await fetch(`${host}/api/specs/${id}`);
-//     const result = await data.json()
-
-//     return {
-//       props: {result:result}
-//     }
-//   }
-
   View.getInitialProps = async (ctx) => {
-    console.log('ctx in pokemonList', ctx)
     const {id} = ctx.query  
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
     const json = await res.json()

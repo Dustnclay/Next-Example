@@ -6,10 +6,37 @@
 .row{
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 
   .col{
     display:flex;
     flex-direction: column;
+  }
+
+  .button{
+    margin:5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: linear-gradient(rgb(83, 95, 202),white);
+    border: 1px solid black;
+    background-color: blue;
+    color: yellow;
+    font-size: 2em;
+  }
+
+  .backButton{
+    margin:5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: linear-gradient(rgb(83, 95, 202),white);
+    border: 1px solid black;
+    background-color: rgb(211, 33, 33);
+    color: yellow;
+    font-size: 2em;
+  }
+  
+  .buttonContainer{
+    display: flex;
+    justify-content: space-evenly;
   }

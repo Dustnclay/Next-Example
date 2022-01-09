@@ -18,14 +18,17 @@ export default function Pokecard(props){
     return(
           
                 <div key={props.pokemon} className={styles.card}>
-                    <h3>{headerId}</h3>
-                    <h1 className={styles.textCenter}> {name}</h1>
-                    <div className={styles.imageContainer}>
-                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`} ></img>
-                    </div>
+                    <Link href={viewId}>
                     <div className={styles.textCenter}>
-                        <Link href={viewId}>View Pokemon</Link>
-                    </div>
+                        <h3>{headerId}</h3>
+                        <h1 className={styles.textCenter}> {name}</h1>
+                        <div className={styles.imageContainer}>
+                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`} ></img>
+                        </div>
+                        
+                            
+                        </div>
+                    </Link>
                 </div>  
             
 
