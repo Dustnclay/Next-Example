@@ -18,7 +18,7 @@ function View(props){
     const pokemonId = info.id.toString()
     let backId;
     let name = info.name[0].toUpperCase() + info.name.substring(1)
-
+    console.log('pokemonid', pokemonId)
     if(pokemonId.length == 1){
         headerId = "#00"+pokemonId
     }else if(pokemonId.length == 2){
@@ -31,15 +31,29 @@ function View(props){
         prev = parseInt(pokemonId) - 1
         prevLink = `/view/${prev}`
     }
-
-    // special case for 898 and 10001
-
-
-    if (pokemonId < 1118) {
+    if (pokemonId < 898) {
         next = parseInt(pokemonId) +1
         nextLink = `/view/${next}`
+    }else if (pokemonId == 898 ){
+        next = 10001
+        nextLink = `/view/${next}`
+    }
+    if(pokemonId == 10001){
+        prev = 898
+        next = 900
+        prevLink = `/view/${prev}`
+        nextLink = `/view/${next}`
+
+    }
+    if (pokemonId > 10001 && pokemonId < 10220){
+        next = parseInt(pokemonId) + 1
+        prev = parseInt(pokemonId) - 1
+        nextLink = `/view/${next}`
+        prevLink = `/view/${prev}`
+
     }
 
+    
     if(pokemonId > 898){
         backId = pokemonId - 9102
     }else{
