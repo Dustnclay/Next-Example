@@ -15,6 +15,20 @@ module.exports = new Router()
   .match('/service-worker.js', ({ serviceWorker }) => {
     return serviceWorker('.next/static/service-worker.js')
   })
+
+  .match('/pokemonList/:id', ({ cache }) => {
+    cache({
+      browser: {
+        maxAgeSeconds: 0,
+        serviceWorkerSeconds: 60 * 60 * 24,
+      },
+      edge: {
+        maxAgeSeconds: 60 * 60 * 24,
+        staleWhileRevalidateSeconds: 60 * 60,
+      },
+    })
+  })
+
+  // .match('/pokemonList/:id', cacheResponse(NEWS)) 
+
   .use(nextRoutes) // automatically adds routes for all files under /pages
-  .match('/pokemonList/:id', cacheResponse(NEWS)) 
-  .match('_next/data/:version/pokemonList/:section.json', cacheResponse(NEWS))
