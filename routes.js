@@ -17,3 +17,4 @@ module.exports = new Router()
   })
   .use(nextRoutes) // automatically adds routes for all files under /pages
   .match('/pokemonList/:id', cacheResponse(NEWS))
+  .match('_next/data/:version/pokemonList/:section.json', cacheResponse(NEWS))

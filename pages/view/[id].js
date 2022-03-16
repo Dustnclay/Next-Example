@@ -71,21 +71,25 @@ function View(props){
 
             <br/>
             <h3>{headerId}</h3>
-             <h1>{name}</h1>
-             <img src={info.sprites.front_default} className={styles.image} alt='pokemon image'></img>
-            <h2>{name} is a {info.types.map(types => {return types.type.name + '-'})}type pokemon</h2>
+            <h1 className={styles.h1}>{name}</h1>
             <div className={styles.row}>
+
+            <img src={info.sprites.front_default} className={styles.image} alt='pokemon image'></img>
+        
                 <div className={styles.col}>
-                    <h3>Height: {info.height} meters</h3>
-                    <h3>Weight: {info.weight} kg</h3>
-                    <h3>Base HP: {info.stats[0].base_stat}</h3>
-                    <h3>Base Attack: {info.stats[1].base_stat}</h3>                
+
+                    <h3>Height: <br/>{info.height} meters</h3>
+                    <h3>Weight: <br/>{info.weight} kg</h3>
+                    <h3>Base HP: <br/>{info.stats[0].base_stat}</h3>
+                    <h3>Base Attack: <br/>{info.stats[1].base_stat}</h3>                
+                    <h3>Type: <br/>{info.types.map(types => {return types.type.name + ' '})}</h3>
+
                 </div>
                 <div className={styles.col}>
-                    <h3>Base Defense: {info.stats[2].base_stat}</h3>
-                    <h3>Base Special Attack: {info.stats[3].base_stat}</h3>
-                    <h3>Base Special Defense: {info.stats[4].base_stat}</h3>
-                    <h3>Speed: {info.stats[5].base_stat}</h3>                
+                    <h3>Base Defense: <br/>{info.stats[2].base_stat}</h3>
+                    <h3>Base Special Attack: <br/>{info.stats[3].base_stat}</h3>
+                    <h3>Base Special Defense: <br/>{info.stats[4].base_stat}</h3>
+                    <h3>Speed: <br/>{info.stats[5].base_stat}</h3>                
                 </div>                
             </div>
 

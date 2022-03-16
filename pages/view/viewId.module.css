@@ -1,4 +1,9 @@
+.h1{
+  padding-left: 5%;
+}
+
 .image{
+  margin-top: 10%;
     height: 190px;
     width: 180px;
 }
@@ -39,4 +44,5 @@
   .buttonContainer{
     display: flex;
     justify-content: space-evenly;
+    margin-top: 10%;
   }
